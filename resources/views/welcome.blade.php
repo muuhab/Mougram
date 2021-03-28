@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+    <div class="container sign-page">
 
     <div class="row">
         <div class="col-md-6">
@@ -23,6 +24,11 @@
                 <input class="form-control {{ $errors->has('fname') ? 'is-invalid' : '' }}" type="text" name="fname" id="fname" value="{{Request::old('fname')}}">
                 @if($errors->has('fname'))
                     <div class="error text-danger">{{ $errors->first('fname') }}</div>
+                @endif
+                <label for="lname">Last Name</label>
+                <input class="form-control {{ $errors->has('lname') ? 'is-invalid' : '' }}" type="text" name="lname" id="lname" value="{{Request::old('lname')}}">
+                @if($errors->has('lname'))
+                    <div class="error text-danger">{{ $errors->first('lname') }}</div>
                 @endif
                 <label for="pass">Password</label>
                 <input class="form-control {{ $errors->has('pass') ? 'is-invalid' : '' }}" type="password" name="pass" id="pass" value="{{Request::old('pass')}}">
@@ -56,5 +62,7 @@
             </form>
            
         </div>
+    </div>
+
     
 @endsection

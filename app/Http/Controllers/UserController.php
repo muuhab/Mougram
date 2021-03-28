@@ -19,6 +19,7 @@ class UserController extends Controller
         $this->validate($request,[
             'email'=>'required|unique:users|email',
             'fname'=>'required|max:120',
+            'lname'=>'required|max:120',
             'pass'=>'required|min:4',
 
         ]);
@@ -26,6 +27,7 @@ class UserController extends Controller
         $user=new User();
         $user->email=$request->input('email');
         $user->first_name=$request->input('fname');
+        $user->last_name=$request->input('lname');
         $user->password=bcrypt($request->input('pass'));
         $user->profile_image='noimage.jpg';
         $user->save();
@@ -45,9 +47,9 @@ class UserController extends Controller
         ]);
         if(Auth::attempt(['email'=>$request['email2'],'password'=>$request['pass2']]))
         {
-            Mail::raw('muhaaaa',function($a){
-                $a->to(request('email2'))->subject('aaa');
-            });
+            // Mail::raw('muhaaaa',function($a){
+            //     $a->to(request('email2'))->subject('aaa');
+            // });
             return redirect()->route('dashboard');
         }
         else{

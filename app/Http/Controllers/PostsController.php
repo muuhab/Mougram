@@ -20,7 +20,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts=Post::orderBy('created_at','desc')->paginate(10);
+        $posts=Post::orderBy('created_at','desc')->paginate(5);
         return view('dashboard',['posts'=>$posts]);
     }
 
@@ -124,7 +124,7 @@ class PostsController extends Controller
         $post->delete();
         $post->likes()->delete();
         $post->comments()->delete();
-        return redirect('/dashboard')->with('message','Successfully Deleated');
+        return redirect('dashboard')->with('message','Successfully Deleated');
     }
 
 

@@ -1,239 +1,165 @@
-
-
 @extends('layouts.master')
 
 @section('title')
     Dashboard
 @endsection
 
+@section('bar')
+@include('inc.sidebar')
+@include('inc.chatBar') 
+@endsection
+
 @section('content')
-  
-
-  <!-- Page Content -->
-
-
-    <div class="row">
-      <div class="col-md-4 mt-5">
-      <form method="post" action="{{route('posts.store')}}" enctype="multipart/form-data">
-          {{@csrf_field()}}
-          <div class="form-group">
-
-            <textarea class=" form-control" name="body" rows="2" ></textarea>
-          </div>
-          <div class="btn-group">
-
-            <div class="custom-file col-8">
-              <input type="file" class="custom-file-input" id="customFile" name="cover_image">
-              <label class="custom-file-label " for="customFile" id="img-lab">Choose Image</label>
-            </div>
-            <button type="submit" class="btn btn-primary ml-2">Create Post</button>
-          </div>
-
-        </form>
-        @include('inc.message')
-      </div>
-
-      <!-- Blog Entries Column -->
-      <div class="col-md-4">
-
-        <h1 class="my-4">Home
-        </h1>
-
-        <!-- Blog Post -->
-        @foreach($posts as $post)
-      
-        <div class="card mb-4 a" data-postid="{{$post->id}}">
-          <img class="card-img-top" src="/storage/cover_images/{{$post->cover_image}}" alt="Card image cap">
-          <div class="card-body b">
-          <p class="card-text">{{$post->body}}</p>
-          <a href="#" id="like">
-            <i class="far  fa-heart  fa-2x {{Auth::user()->likes()->where('post_id',$post->id)->first() ? Auth::user()->likes()->where('post_id',$post->id)->first()->like == 1 ?'fa text-danger':'text-secondary':'text-secondary'}}" aria-hidden="true" id="heart"></i>
-          </a>
-        <a href="#" id="comm" class="text-secondary " ><span>{{count($post->comments)>0 ? count($post->comments):null}}</span> <span>{{ count($post->comments)>0 ? count($post->comments)==1 ? 'Comment': 'Comments':null }}</a>
-          <div class="likes"></span>
-            <span id="likesNum">{{count($post->likes)>0 ? count($post->likes):null}}</span>
-          <span>{{ count($post->likes)>0 ? count($post->likes)==1 ? 'Like': 'Likes':null }}</span>
-          </div>
-            <div class="button-group mt-3">
-              @if(Auth::user()==$post->user)
-            <a class="btn btn-warning " href="#" id="edit-sec" >Edit</a>
-              <a class="btn btn-danger"  href="{{route('posts.de',$post->id)}}" >Delete</a>
-              @endif
-            </div>
-            <form id="formCom" class="adf">
-            <div class="form-group mt-3">
-              <textarea class="form-control com" placeholder="Write Comment" name="comment"></textarea>
-              <input type="submit" class="form-control-range mt-2">
-            </div>
-          </form>
-        
-          <div class="card-text " >
-            <div class="modal fade" tabindex="-1" role="dialog" id="modee2">
-              <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document" id="scr">
-                <div class="modal-content">
-                  <div class="modal-header ">
-                  <h4 class="modal-title ">Comments</h4>
-                    <button type="button" class="close " data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                  </div>
-                  <div class="modal-body">
-                    <div class="container">
-                      <div class="row" id="comPlace">
-                        @foreach ($post->comments as $comment)
-                        
-                      <div class="col-12 card bg-light mb-2">
-                        <h6>{{$comment->user->first_name}}</h6>
-                        <p>{{$comment->comment}}</p>
-                        {{-- <small class="text-muted">{{time_elapsed_string($comment->created_at)}}</small> --}}
-                        <time class="text-muted" id="tmm" datetime="{{$comment->created_at}}"></time>
-                      </div>  
-                        @endforeach
-                      </div>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
-                </div><!-- /.modal-content -->
-              </div><!-- /.modal-dialog -->
-            </div><!-- /.modal -->
+<div class="container-fluid ">
             
-          </div>
-          </div>
-          <div class="card-footer text-muted">
-            Posted by {{$post->user->first_name}} on {{$post->created_at}}
-           
-          </div>
+ <div class="row ">
+<div class="col-2"></div>
+<div class="col-5 mt-3 ">
+
+<div class="bg-white content p-4 round">
+
+  <!--               Write Post         -->
+
+    <div class=" border-bottom  ">
+      <p class="font-weight-bold">Post Someething</p>
+    </div>
+    <div class="p-2 mt-2">
+      <img class="rounded-circle" src="https://picsum.photos/36/36">
+      <button class="write" id="post" >
+       <span class="text-secondary"> What's on your mind?</span>
+      </button>
+    </div>
+    
+  </div> <!--    End Write Post      -->
+
+    
+    <!--            Posts         -->
+    @foreach($posts as $post)
+
+  <div class="mt-4 bg-white p-4 round" data-postid="{{$post->id}}">
+    <div style="position: relative">
+      <img class="rounded-circle" src="https://picsum.photos/36/36">
+      <div class="p-1" style="position: relative; display: inline-block;">
+        <p class="font-weight-bold name">Muhab Sherif</p>
+        <small class="date">12-10-2010</small>
+      </div>
+      <div class="dropdown">
+        <a class="dots " href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  
+          <i class="fas fa-ellipsis-h text-secondary "></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          @if(Auth::user()==$post->user)
+          <a class="dropdown-item " href="#" id="edit-sec" >Edit</a>
+            <a class="dropdown-item"  href="{{route('posts.de',$post->id)}}" >Delete</a>
+          @endif
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
         </div>
-        @endforeach
-
-        
-
-        <!-- Pagination -->
-        {{-- <ul class="pagination justify-content-center mb-4">
-          <li class="page-item">
-            <a class="page-link" href="#">&larr; Older</a>
-          </li>
-          <li class="page-item disabled">
-            <a class="page-link" href="#">Newer &rarr;</a>
-          </li>
-        </ul> --}}
-        {{$posts->links()}}
 
       </div>
-
-      <!-- Sidebar Widgets Column -->
-      <div class="col-md-4">
-
-        <!-- Search Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Search</h5>
-          <div class="card-body">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search for...">
-              <span class="input-group-append">
-                <button class="btn btn-secondary" type="button">Go!</button>
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Categories Widget -->
-        <div class="card my-4">
-          <h5 class="card-header">Categories</h5>
-          <div class="card-body">
-            <div class="row">
-              <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#">Web Design</a>
-                  </li>
-                  <li>
-                    <a href="#">HTML</a>
-                  </li>
-                  <li>
-                    <a href="#">Freebies</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-lg-6">
-                <ul class="list-unstyled mb-0">
-                  <li>
-                    <a href="#">JavaScript</a>
-                  </li>
-                  <li>
-                    <a href="#">CSS</a>
-                  </li>
-                  <li>
-                    <a href="#">Tutorials</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Side Widget -->
-        {{-- <div class="card my-4">
-          <h5 class="card-header">Side Widget</h5>
-          <div class="card-body">
-            You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-          </div>
-        </div> --}}
-
+    </div>
+    <p class="mt-4">{{$post->body}}</p>
+    <img class="round img-responsive img-fluid" src="{{$post->cover_image}}" alt="Card image cap"  >
+    <div class="mt-2">
+      <div class="likes text-secondary">
+        <span id="likesNum">{{count($post->likes)>0 ? count($post->likes):null}}</span>
+      <span>{{ count($post->likes)>0 ? count($post->likes)==1 ? 'Like': 'Likes':null }}</span>
       </div>
+      <a href="#" id="comm" class="text-secondary comments" ><span>{{count($post->comments)>0 ? count($post->comments):null}}</span> <span>{{ count($post->comments)>0 ? count($post->comments)==1 ? 'Comment': 'Comments':null }}</a>
+    </div>
+    <div class="post-tab">
+      <div class="container p-2 mt-3 border-top border-bottom  ">
+      <div class="row">
+        <button class="col-3 write" id="comm2"><i class="far fa-comment text-secondary mr-2"></i>Comments</button>
+        <a class="col-3"><i class="far fa-heart text-secondary mr-2"></i>Likes</a>
+        <a class="col-3"><i class="fas fa-share-alt text-secondary mr-2"></i>Share</a>
+        <a class="col-3"><i class="far fa-bookmark text-secondary mr-2"></i>Saved</a>
+      </div>
+    </div>
 
     </div>
-    <!-- /.row -->
 
-
+    
+    <div class="row mt-2 hide">
+        @foreach ($post->comments as $comment)
+        <div class="col-1 mr-2 my-2">
+          
+          <img class=" rounded-circle" src="https://picsum.photos/36/36">
+        </div>
+        <div class="col-10 bg-light round my-2  ">
+        <p class="font-weight-bold ">{{$comment->user->first_name}}</p>
+        <p>{{$comment->comment}}</p>
+        <time class="text-muted" id="tmm" datetime="{{$comment->created_at}}"></time>
+          {{-- <textarea class="form-control write " rows="1" placeholder="Write your comment..." name="comment" id="txtInput"></textarea> --}}
+        </div>
+        
+        @endforeach
+      </div>
+  </div>
   
 
+  @endforeach
+</div>
 
-
-<div class="modal fade" tabindex="-1" role="dialog" id="modee">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">Edit Post</h4>
+<div class="col-3 mt-3 ">    <!--      Stories   -->
+  <div class="round2 bg-white p-4">
+    <div class=" border-bottom mb-2  ">
+      <p class="font-weight-bold">Stories</p>
+    </div>
+    
+    <div class="mb-4">
+      <i class="fas fa-plus fa-1x rounded-circle text-primary  p-3 shadow-sm" ></i>
+      <div class="p-1" style="position: relative; display: inline-block;">
+        <p class="font-weight-bold name">Muhab Sherif</p>
+        <small class="date">12-10-2010</small>
       </div>
-      <div class="modal-body">
-        <form>
-        {{-- <input type="hidden" name="_token" value="{{ Session::token() }}" id="tok"> --}}
-          <div class="form-group">
-            <label for="ta">Edit The Post</label>
-            <textarea class=" form-control" name="body" rows="2" id="ta" style="resize:none;" ></textarea>
-          </div>
-
-        </form>
+    </div>
+    <div class="mb-4">
+      <img class="rounded-circle" src="https://picsum.photos/36/36">
+      <div class="p-1" style="position: relative; display: inline-block;">
+        <p class="font-weight-bold name">Muhab Sherif</p>
+        <small class="date">12-10-2010</small>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" id="modal-save">Save changes</button>
+    </div>
+    <div class="mb-4">
+      <img class="rounded-circle" src="https://picsum.photos/36/36">
+      <div class="p-1" style="position: relative; display: inline-block;">
+        <p class="font-weight-bold name">Muhab Sherif</p>
+        <small class="date">12-10-2010</small>
       </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+    </div>
+    <div class="mb-4">
+      <img class="rounded-circle" src="https://picsum.photos/36/36">
+      <div class="p-1" style="position: relative; display: inline-block;">
+        <p class="font-weight-bold name">Muhab Sherif</p>
+        <small class="date">12-10-2010</small>
+      </div>
+    </div>
+    </div>
+    <button class="blue-chick">
+      <span class="text-primary">SEE ALL</span>
+    </button>
+    <div class="bg-white mt-4 p-3">
+      <div class=" border-bottom  ">
+        <p class="font-weight-bold">Events</p>
+      </div>
+      <div class="mt-3">
+
+        <i class="fas fa-calendar-week text-secondary pr-4"> 10 Events</i>
+      </div>
+    </div>
+</div>
 
 
 
+
+
+
+</div>
+</div>
+@include('inc.commentModel')
+@include('inc.postModel')
+@include('inc.editModel')
 @endsection
-  @section('footer')
-      <!-- Footer -->
-    <footer class="py-5 bg-dark">
-      <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2020</p>
-      </div>
-      <!-- /.container -->
-    </footer> 
-    <script>
-      var urlEdit='{{route('edit') }}';
-      var urlLike='{{route('like') }}';
-      var urlCom='{{route('com') }}';
-      var urlshow='{{route('showCom') }}';
-      var token='{{Session::token() }}';
-
-    </script>
- 
-   
-  @endsection

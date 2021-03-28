@@ -13,19 +13,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::group(['middleware'=>'auth'],function(){
-    Route::get('/dashboard','PostsController@index')->name('dashboard');
     Route::get('/post-delete/{id}','PostsController@destroy')->name('posts.de');
+    Route::post('/edit','PostsController@postEdit')->name('edit');
     Route::get('logout','UserController@logout')->name('logout');
   
 
 });
 Route::group(['middleware'=>'auth'],function(){});
-Route::get('/', function () {
+Route::get('/login', function () {
     return view('welcome');
 })->name('login');
+Route::get('/','PostsController@index')->name('dashboard');
 Route::post('/signup','UserController@postSignUp')->name('signup');
 Route::post('/signin','UserController@postSignIn')->name('signin');
-Route::post('/edit','PostsController@postEdit')->name('edit');
 Route::post('/like','PostsController@postLike')->name('like');
 Route::post('/comment','PostsController@postCom')->name('com');
 Route::post('/comment-show','PostsController@showCom')->name('showCom');

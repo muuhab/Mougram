@@ -1,0 +1,134 @@
+body{
+    background-color:#FAFAFB;
+    overflow-x: hidden;
+    font-family: 'K2D', sans-serif;
+    
+}
+nav .navbar-nav li a{
+    color: black ;
+    }
+nav .navbar-brand {
+    color: black ;
+    }
+/* nav{
+    position: relative;
+
+} */
+/* .search{
+    display: block;
+    margin: 0px 200px 0px;
+} */
+.fixed-top{
+    position: sticky;
+}
+.dots{
+    position: absolute ;
+    right:0;
+    top:0;
+}
+/* .footer{
+    position:sticky;
+    top:0;
+    z-index: 999999;
+    bottom:auto;
+} */
+.username,.round {
+    border-radius: 1.5rem;
+}
+.img-responsive{
+    display:block;
+    margin:auto;
+}
+.date{
+    color: gray;
+    display: block;
+    position: absolute;
+    top: 20;
+    left: 10;
+}
+.name{
+    display: inline;
+}
+textarea{
+    resize: none;
+}
+.write{
+    background:none;
+    border:none;
+    
+
+}
+.round2{
+    border-top-left-radius: 1.5rem;
+    border-top-right-radius: 1.5rem;
+}
+.blue-chick{
+    display: block;
+    margin: auto;
+    width:100%;
+    padding: 5%;
+    border:none;
+    background-color: #F1F8FF;
+}
+.sidenav{
+     height: 100vh;
+   /* position: fixed; */
+   position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 1; 
+  left: 0;
+  /* background-color: #111; Black */
+  /* overflow-x: hidden; Disable horizontal scroll */
+  /* padding-top: 50px; */
+}
+.chatBar{
+    position: fixed;
+    right:0;
+    top:1;
+    bottom: 1;
+    background-color:white;
+    overflow-y: auto;
+    height: 100vh;
+}
+.chatBar::-webkit-scrollbar {
+    display: none;
+}
+
+
+.upload:hover {
+	color: cornflowerblue;
+}
+
+.upload:active {
+	color: mediumaquamarine;
+}
+
+.upload-input {
+	border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px; 
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    
+}
+.likes{
+    display: inline;
+}
+.comments{
+    float: right;
+}
+.hide{
+    position: absolute ;
+   top: -9999px ;
+   left: -9999px ;
+}
+.sign-page{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
