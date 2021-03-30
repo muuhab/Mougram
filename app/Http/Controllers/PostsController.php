@@ -20,7 +20,8 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts=Post::orderBy('created_at','desc')->paginate(5);
+        // $posts=Post::orderBy('created_at','desc')->paginate(5);
+        $posts=Post::orderBy('created_at','desc')->get();
         return view('dashboard',['posts'=>$posts]);
     }
 
@@ -69,7 +70,7 @@ class PostsController extends Controller
        {
            $message='Created Successfully';
        }
-        return \redirect('/dashboard')->with(['message'=>$message]);
+        return \redirect('/')->with(['message'=>$message]);
     }
 
     /**
@@ -124,7 +125,7 @@ class PostsController extends Controller
         $post->delete();
         $post->likes()->delete();
         $post->comments()->delete();
-        return redirect('dashboard')->with('message','Successfully Deleated');
+        return redirect()->back()->with('message','Successfully Deleated');
     }
 
 
@@ -146,7 +147,7 @@ class PostsController extends Controller
     
     public function postLike(Request $request){
         $post_id=$request['postId'];
-        $isLike=$request['like']==='true';
+        $isLike=$request['like']=='true';
         $post=Post::find($post_id);
       
         $user=Auth::user();
@@ -163,7 +164,7 @@ class PostsController extends Controller
         $like->user_id=$user->id;
         $like->post_id=$post->id;
         $like->save();
-        return response()->json(['likes'=>count($post->likes)],200);
+        return response()->json(['likes'=>toK(count($post->likes))],200);
     }
 
     
@@ -177,10 +178,10 @@ class PostsController extends Controller
         $comment->post_id=$request['postId'];
         $comment->user_id=$user->id;
         $comment->save();
-        $coun=Comment::where('post_id',$request['postId'])->get();
-        $us=$user->first_name;
-        $t=time_elapsed_string($comment->created_at);
-        return response()->json(['a'=>$comment,'count'=>$coun,'us'=>$us,'t'=>$t],200);
+        $count=toK(count(Comment::where('post_id',$request['postId'])->get()));
+        $user=$user->first_name ;
+        // $time=time_elapsed_string($comment->created_at);
+        return response()->json(['comment'=>$comment,'user'=>$user,'numberOfComments'=>$count],200);
     }
     
    

@@ -24,13 +24,14 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'first_name' => $this->faker->name,
-            'last_name' => $this->faker->name,
+            'first_name' => $this->faker->firstname,
+            'last_name' => $this->faker->lastname,
             'email' => $this->faker->unique()->safeEmail,
-            // 'email_verified_at' => now(),
+            'about' => $this->faker->sentence(20),
+            'profession' => $this->faker->randomElement(['UI/UX Designer', 'Frontend Developer', 'Fullstack Developer', 'Wordpress developer', 'Data Entry', 'Engineer', 'Poet']),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
-            'profile_image'=>$this->faker->imageUrl()
+            'profile_image'=>'https://picsum.photos/500/300'
         ];
     }
 }

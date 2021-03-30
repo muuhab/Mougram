@@ -28,6 +28,7 @@
             <input type="submit" value="Post" class="form-control bg-primary mt-2 text-white">
         </div>
     </form>
+    @include('inc.message')
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->

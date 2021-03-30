@@ -124,7 +124,6 @@
 
 
 
-// $("#txtInput").autogrow();
 // });
 
 // var chos = document.getElementById('img-lab');
@@ -145,10 +144,82 @@ document.getElementById('post').addEventListener('click',(e)=>{
 });
 
 //Writing Comment
-document.getElementById('post').addEventListener('click',(e)=>{
+document.querySelectorAll('#comment-form').forEach((e)=>{e.addEventListener('submit',(e)=>{
   e.preventDefault();
-  $('#post-model').modal();
+  const postId=e.target.parentNode.parentNode.dataset.postid;
+  const comment=e.target.children[0].children[0].value;
+  sendComment(urlCom,{comment:comment,postId:postId,_token:token}).then((data)=>{
+  const elem=e.target.parentNode.parentNode.children[7];
+  const newElem=document.createElement('div')
+  console.log(newElem);
+  })
+})});
+
+const sendComment= async(url='',data = {})=>{
+  const response = await fetch(url, {
+  method: 'POST', 
+  credentials: 'same-origin',
+  headers: {
+      'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data), 
 });
+
+  try {
+    const newData = await response.json();
+    return newData;
+  }catch(error) {
+  console.log("error", error);
+  }
+}
+
+
+//Like System
+document.querySelectorAll('#like').forEach((e)=>{e.addEventListener('click',(e)=>{
+  e.preventDefault();
+  const elem=e.target;
+  // console.log(elem.classList.contains('text-primary'));
+  const postID=elem.parentNode.parentNode.dataset.postid
+  if(elem.classList.contains('text-primary'))
+  {
+    elem.classList.remove('text-primary')
+  }
+  else{
+    elem.classList.add('text-primary')
+  }
+  const status=elem.classList.contains('text-primary')
+  console.log(status);
+  like(urlLike,{like:status,postId:postID,_token:token}).then((data)=>{
+    const addAfter=elem.parentNode.parentNode.children[3].children[1].children[0].children[0];
+    if(data.likes>0){
+      addAfter.textContent=data.likes
+    }
+    else{
+      addAfter.innerHTML=""
+      
+    }
+
+  })
+
+})});
+
+const like= async(url='',data = {})=>{
+  const response = await fetch(url, {
+  method: 'POST', 
+  credentials: 'same-origin',
+  headers: {
+      'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(data), 
+});
+
+  try {
+    const newData = await response.json();
+    return newData;
+  }catch(error) {
+  console.log("error", error);
+  }
+}
 
 //Editing Post
 let post_id=null;
@@ -189,14 +260,64 @@ const editSec= async(url='',data = {})=>{
 //Showing Comments
 document.querySelectorAll('#comm').forEach((e)=>{e.addEventListener('click',(e)=>{
   e.preventDefault();
-  const x=e.target.parentNode.parentNode.parentNode.children[5];
+  const x=e.target.parentNode.parentNode.parentNode.parentNode.children[6];
   x.classList.toggle("hide");
 
 })});
 document.querySelectorAll('#comm2').forEach((e)=>{e.addEventListener('click',(e)=>{
   e.preventDefault();
-  const x=e.target.parentNode.parentNode.parentNode.parentNode.children[5];
-  console.log(x);
+  const x=e.target.parentNode.parentNode.children[6];
+  // console.log(x);
   x.classList.toggle("hide");
 
 })});
+
+//Infinite Scrolling
+
+
+//Profile Navigation Tabs
+$(function(){
+  $("textarea").autogrow();//Writing Comment
+  document.querySelectorAll('#comment').forEach((e)=>{e.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    const postId=e.target.parentNode.parentNode.parentNode.parentNode.dataset.postid;
+    console.log(postId);
+    
+   
+  })});
+  
+  const sendComment= async(url='',data = {})=>{
+    const response = await fetch(url, {
+    method: 'POST', 
+    credentials: 'same-origin',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data), 
+  });
+  
+    try {
+      const newData = await response.json();
+      return newData;
+    }catch(error) {
+    console.log("error", error);
+    }
+  }
+
+  $('.nav-tabs a').click(function(){
+    $(this).tab('show');
+  })
+  
+  // Select tab by name
+  $('.nav-tabs a[href="#home"]').tab('show')
+  
+  // Select first tab
+  $('.nav-tabs a:first').tab('show')
+  
+  // Select last tab
+  $('.nav-tabs a:last').tab('show')
+  
+  // Select fourth tab (zero-based)
+  $('.nav-tabs li:eq(3) a').tab('show')
+  
+});

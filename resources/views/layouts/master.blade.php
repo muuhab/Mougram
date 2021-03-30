@@ -15,7 +15,6 @@
         {{-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> --}}
         <link href="{{asset('offline/boot/css/bootstrap.min.css')}}" rel="stylesheet">
         <link href="{{asset('offline/fontawesome-free-5.11.2-web/css/all.css')}}" rel="stylesheet">
-        {{-- <link href="{{asset('css/app.css')}}" rel="stylesheet"> --}}
         <link href="{{asset('css/mycss.css')}}" rel="stylesheet">
         <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=K2D:wght@200&display=swap" rel="stylesheet">
