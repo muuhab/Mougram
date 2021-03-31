@@ -278,31 +278,9 @@ document.querySelectorAll('#comm2').forEach((e)=>{e.addEventListener('click',(e)
 //Profile Navigation Tabs
 $(function(){
   $("textarea").autogrow();//Writing Comment
-  document.querySelectorAll('#comment').forEach((e)=>{e.addEventListener('submit',(e)=>{
-    e.preventDefault();
-    const postId=e.target.parentNode.parentNode.parentNode.parentNode.dataset.postid;
-    console.log(postId);
-    
-   
-  })});
+
   
-  const sendComment= async(url='',data = {})=>{
-    const response = await fetch(url, {
-    method: 'POST', 
-    credentials: 'same-origin',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data), 
-  });
-  
-    try {
-      const newData = await response.json();
-      return newData;
-    }catch(error) {
-    console.log("error", error);
-    }
-  }
+
 
   $('.nav-tabs a').click(function(){
     $(this).tab('show');

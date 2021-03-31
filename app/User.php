@@ -21,8 +21,5 @@ class User extends Model implements Authenticatable
     public function comments(){
         return $this->hasMany('App\Comment');
     }
-    public function friends()
-    {
-    return $this->belongsToMany('App\User', 'id', 'user_id', 'friend_id');
-    }
+    
 }
