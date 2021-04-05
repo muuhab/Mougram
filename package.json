@@ -22,6 +22,7 @@
     "dependencies": {
         "infinite-scroll": "^4.0.1",
         "jquery-autogrow-textarea": "^1.3.0",
+        "normalize.css": "^8.0.1",
         "startbootstrap-blog-home": "^4.2.2"
     }
 }

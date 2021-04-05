@@ -13,14 +13,12 @@
       
                   <textarea class=" form-control" name="body" placeholder="What's on your mind" rows="2" ></textarea>
                 </div>
-                <div class="btn-group">
-      
-                  <div class="custom-file col-8">
-                    <input type="file" class="custom-file-input" id="customFile" name="cover_image">
-                    <label class="custom-file-label " for="customFile" id="img-lab">Choose Image</label>
+                <div class="wrapper">
+                  <div class="file-upload">
+                    <input type="file" id="customFile" name="cover_image" />
+                    <i class="fa fa-arrow-up "></i>
                   </div>
                 </div>
-                
                 
             </div>
         </div>

@@ -1,4 +1,4 @@
-  <div class="col-2 chatBar">    <!---       Chat      ---->
+  <div class="col-2 chatBar d-md-block d-none">    <!---       Chat      ---->
     <div>
         <p class="text-secondary py-3  ">FRIENDS</p>
       <div class="mb-4">

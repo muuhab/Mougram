@@ -28,10 +28,11 @@ class UserFactory extends Factory
             'last_name' => $this->faker->lastname,
             'email' => $this->faker->unique()->safeEmail,
             'about' => $this->faker->sentence(20),
+            'phone' => $this->faker->phoneNumber,
             'profession' => $this->faker->randomElement(['UI/UX Designer', 'Frontend Developer', 'Fullstack Developer', 'Wordpress developer', 'Data Entry', 'Engineer', 'Poet']),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
-            'profile_image'=>'https://picsum.photos/500/300'
+            'profile_image'=>'https://picsum.photos/45/45'
         ];
     }
 }

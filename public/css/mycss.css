@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 body {
     background-color: #fafafb;
     overflow-x: hidden;
@@ -56,6 +61,7 @@ textarea {
     background: none;
     border: none;
 }
+
 .round2 {
     border-top-left-radius: 1.5rem;
     border-top-right-radius: 1.5rem;
@@ -999,3 +1005,46 @@ button.btn-link {
     flex: 1;
     font-size: 16px;
 }
+/*Upload Button*/
+.wrapper{
+  
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+  
+    .file-upload{
+  
+      height:50px;
+      width:50px;
+      border-radius: 100px;
+      position:relative;
+      display:flex;
+      justify-content:center;
+      align-items: center;  
+      border:4px solid #FFFFFF;
+      overflow:hidden;
+      background-image: linear-gradient(to bottom, #2590EB 50%, #FFFFFF 50%);
+      background-size: 100% 200%;
+      transition: all 1s;
+      color: #FFFFFF;
+      font-size:20px;
+    }
+      input[type='file']{
+        height:200px;
+        width:200px;
+        position:absolute;
+        top:0;
+        left:0;
+        opacity:0;
+        cursor:pointer;
+      }
+      .file-upload:hover{
+
+        background-position: 0 -100%;
+  
+        color:#2590EB;
+  
+      }

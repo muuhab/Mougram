@@ -22,7 +22,7 @@ class PostsController extends Controller
     {
         // $posts=Post::orderBy('created_at','desc')->paginate(5);
         $posts=Post::orderBy('created_at','desc')->get();
-        return view('dashboard',['posts'=>$posts]);
+        return view('dashboard',['posts'=>$posts,'user'=>Auth::user()]);
     }
 
     /**

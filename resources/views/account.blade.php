@@ -18,12 +18,12 @@
                    <div class="profile-header-content">
                       <!-- BEGIN profile-header-img -->
                       <div class="profile-header-img">
-                         <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+                         <img src="{{$user->profile_image}}" alt="">
                       </div>
                       <!-- END profile-header-img -->
                       <!-- BEGIN profile-header-info -->
                       <div class="profile-header-info">
-                         <h4 class="m-t-10 m-b-5">Sean Ngu</h4>
+                         <h4 class="m-t-10 m-b-5">{{$user->first_name}} {{$user->last_name}}</h4>
                          <p class="m-b-10">UXUI + Frontend Developer</p>
                          <a href="#" class="btn btn-sm btn-info mb-2">Edit Profile</a>
                       </div>
@@ -48,30 +48,22 @@
                 <div class="tab-content p-0">
                    <!-- begin #profile-post tab -->
                    <div class="tab-pane fade active show" id="profile-post">
-                    <form action="#" class="panel-activity__status">
-                        <textarea name="user_activity" placeholder="Share what you've been up to..." class="form-control"></textarea>
-                        <div class="actions">
-                            <div class="btn-group">
-                                <button type="button" class="btn-link" title="" data-toggle="tooltip" data-original-title="Post an Image">
-                                    <i class="fa fa-image"></i>
-                                </button>
-                                <button type="button" class="btn-link" title="" data-toggle="tooltip" data-original-title="Post an Video">
-                                    <i class="fa fa-video-camera"></i>
-                                </button>
-                                <button type="button" class="btn-link" title="" data-toggle="tooltip" data-original-title="Post an Idea">
-                                    <i class="fa fa-lightbulb-o"></i>
-                                </button>
-                                <button type="button" class="btn-link" title="" data-toggle="tooltip" data-original-title="Post an Question">
-                                    <i class="fa fa-question-circle-o"></i>
-                                </button>
-                            </div>
-                            <button type="submit" class="btn btn-sm btn-rounded btn-info">
-                                Post
-                            </button>
-                        </div>
-                    </form>
                       <!-- begin timeline -->
                       <ul class="timeline">
+                         <li>
+                            <div class="timeline-body">
+                                   <div class=" border-bottom  ">
+                                     <p class="font-weight-bold">Post Someething</p>
+                                   </div>
+                                   <div class="p-2 mt-2">
+                                     <img class="rounded-circle d-inline" src="https://picsum.photos/36/36">
+                                     <button class="write" id="post" >
+                                      <span class="text-secondary"> What's on your mind?</span>
+                                     </button>
+                                   </div>
+                                   
+                            </div>
+                         </li>
                          <li>
                             <!-- begin timeline-time -->
                             <div class="timeline-time">
@@ -259,39 +251,35 @@
                             <div class="col-lg-6">
                                 <div class="about-text go-to">
                                     <h3 class="dark-color">About Me</h3>
-                                    <h6 class="theme-color lead">A Lead UX &amp; UI designer based in Canada</h6>
-                                    <p>I <mark>design and develop</mark> services for customers of all sizes, specializing in creating stylish, modern websites, web services and online stores. My passion is to design digital user experiences through the bold interface and meaningful interactions.</p>
+                                    <h6 class="theme-color lead">{{$user->profession}}</h6>
+                                    <p>{{$user->about}}</p>
                                     <div class="row about-list">
                                         <div class="col-md-6">
                                             <div class="media">
                                                 <label>Birthday</label>
-                                                <p>4th april 1998</p>
+                                                <p>{{$user->address}}</p>
                                             </div>
                                             <div class="media">
                                                 <label>Age</label>
                                                 <p>22 Yr</p>
                                             </div>
                                             <div class="media">
-                                                <label>Residence</label>
-                                                <p>Canada</p>
-                                            </div>
-                                            <div class="media">
                                                 <label>Address</label>
-                                                <p>California, USA</p>
+                                                <p>{{$user->address}}</p>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="media">
                                                 <label>E-mail</label>
-                                                <p>info@domain.com</p>
+                                                <p>{{$user->email}}</p>
                                             </div>
                                             <div class="media">
                                                 <label>Phone</label>
-                                                <p>820-885-3321</p>
+                                                <p>{{$user->phone}}</p>
                                             </div>
                                             <div class="media">
-                                                <label>Skype</label>
-                                                <p>skype.0404</p>
+                                                <label>Facebook</label>
+                                                <p></p>
                                             </div>
                                             <div class="media">
                                                 <label>Freelance</label>

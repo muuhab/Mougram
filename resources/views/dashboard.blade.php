@@ -13,18 +13,17 @@
 <div class="container-fluid ">
             
  <div class="row ">
-<div class="col-2"></div>
-<div class="col-5 mt-3 ">
+<div class="col-md-5 mt-3 offset-md-2 ">
 
 <div class="bg-white content p-4 round">
 
-  <!--               Write Post         -->
+  <!--Write Post-->
 
     <div class=" border-bottom  ">
       <p class="font-weight-bold">Post Someething</p>
     </div>
     <div class="p-2 mt-2">
-      <img class="rounded-circle" src="https://picsum.photos/36/36">
+      <img class="rounded-circle" src="{{$user->profile_image}}">
       <button class="write" id="post" >
        <span class="text-secondary"> What's on your mind?</span>
       </button>
@@ -40,11 +39,11 @@
 
   <div class="mt-4 bg-white p-4 round" data-postid="{{$post->id}}">
     <div style="position: relative">
-      <img class="rounded-circle" src="https://picsum.photos/36/36">
+      <img class="rounded-circle" src="{{$post->user->profile_image}}">
       <div class="p-1" style="position: relative; display: inline-block;">
-        <p class="font-weight-bold name">Muhab Sherif</p>
-        <small class="date">12-10-2010</small>
+        <p class="font-weight-bold name">{{ucfirst($post->user->first_name)}} {{ucfirst($post->user->last_name)}}</p>
       </div>
+      <small class="date ml-4">{{$post->created_at}}</small>
       <div class="dropdown">
         <a class="dots " href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
   
@@ -111,19 +110,6 @@
                  </div>
               </form>
            </div>
-    {{-- <div class="post-tab">
-      <div class="container p-2 mt-3 border-top border-bottom  ">
-      <div class="row">
-        <button class="col-3 write" id="comm2"><i class="far fa-comment text-secondary mr-2"></i>Comments</button>
-        <a class="col-3"><i class="far fa-heart text-secondary mr-2"></i>Likes</a>
-        <a class="col-3"><i class="fas fa-share-alt text-secondary mr-2"></i>Share</a>
-        <a class="col-3"><i class="far fa-bookmark text-secondary mr-2"></i>Saved</a>
-      </div>
-    </div>
-
-    </div> --}}
-
-    
     <div class="row mt-2 hide">
 
         @foreach ($post->comments as $comment)
@@ -132,7 +118,7 @@
           <img class=" rounded-circle" src="https://picsum.photos/46/46">
         </div>
         <div class="col-10 bg-light round my-2  ">
-        <p class="font-weight-bold ">{{ucfirst($comment->user->first_name)}} </p>
+        <p class="font-weight-bold ">{{ucfirst($comment->user->first_name)}} {{ucfirst($comment->user->last_name)}} </p>
         <p>{{$comment->comment}}</p>
         <small class="text-muted">{{time_elapsed_string($comment->created_at)}}</small>
         <time class="text-muted" id="tmm" datetime="{{$comment->created_at}}"></time>
@@ -148,7 +134,7 @@
 </div>
 
 
-<div class="col-3 mt-3 ">    <!--      Stories   -->
+<div class="col-3 mt-3 d-md-block d-none">    <!--      Stories   -->
   <div class="round2 bg-white p-4">
     <div class=" border-bottom mb-2  ">
       <p class="font-weight-bold">Stories</p>
