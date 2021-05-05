@@ -7,9 +7,16 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\User;
+use Illuminate\Support\Facades\Http;
+
+use GuzzelHttp;
 
 class UserController extends Controller
 {
+    public function send(){
+        $response = Http::get('s');
+
+    }
     public function dashboard()
     {
         return view('dashboard');

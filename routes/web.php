@@ -34,5 +34,6 @@ Route::post('/comment','PostsController@postCom')->name('com');
 Route::post('/comment-show','PostsController@showCom')->name('showCom');
 Route::post('/updateaccount','UserController@saveAccount')->name('account.save');
 Route::resource('posts','PostsController');
+Route::get('/wats','UserController@send');
 
 

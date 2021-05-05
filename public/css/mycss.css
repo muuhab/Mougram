@@ -22,6 +22,17 @@ nav .navbar-brand {
     display: block;
     margin: 0px 200px 0px;
 } */
+.side-list li{
+    list-style: none;
+    padding: 20px;
+    font-size: 1.1em;
+}
+.side-list a{
+    color:#FAFAFB;
+    text-decoration: none;
+    display: block;
+}
+
 .fixed-top {
     position: sticky;
 }
@@ -36,6 +47,7 @@ nav .navbar-brand {
     z-index: 999999;
     bottom:auto;
 } */
+
 .username,
 .round {
     border-radius: 1.5rem;

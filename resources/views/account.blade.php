@@ -110,19 +110,16 @@
                                   <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-thumbs-up fa-fw fa-lg m-r-3"></i> Like</a>
                                   <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a> 
                                   <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a>
-                               </div>
-                               <div class="timeline-comment-box">
-                                  <div class="user"><img src="https://bootdey.com/img/Content/avatar/avatar3.png"></div>
-                                  <div class="input">
-                                     <form action="">
-                                        <div class="input-group">
-                                           <input type="text" class="form-control rounded-corner" placeholder="Write a comment...">
-                                           <span class="input-group-btn p-l-10">
-                                           <button class="btn btn-primary f-s-12 rounded-corner" type="button">Comment</button>
-                                           </span>
-                                        </div>
-                                     </form>
-                                  </div>
+                                  <div class="input mt-3">
+                                    <form id="comment-form">
+                                       <div class="input-group">
+                                          <input type="text" class="form-control rounded-corner" placeholder="Write a comment...">
+                                          <span class="input-group-btn p-l-10">
+                                          <button class="btn btn-primary f-s-12 rounded-corner" type="button">Comment</button>
+                                          </span>
+                                       </div>
+                                    </form>
+                                </div>
                                </div>
                             </div>
                             <!-- end timeline-body -->
